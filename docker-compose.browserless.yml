@@ -1,0 +1,17 @@
+name: firecrawl-studio-browserless
+
+services:
+  browserless:
+    image: ghcr.io/browserless/chromium
+    container_name: firecrawl-studio-browserless
+    ports:
+      - "${BROWSERLESS_PORT:-3003}:3000"
+    environment:
+      TOKEN: "${BROWSERLESS_TOKEN:-localdev}"
+      CONCURRENT: "${BROWSERLESS_CONCURRENT:-5}"
+      QUEUED: "${BROWSERLESS_QUEUED:-10}"
+      TIMEOUT: "${BROWSERLESS_TIMEOUT:-120000}"
+      CORS: "true"
+      CORS_ALLOW_ORIGIN: "${BROWSERLESS_CORS_ALLOW_ORIGIN:-http://127.0.0.1:5173}"
+      CORS_ALLOW_METHODS: "POST,OPTIONS"
+    restart: unless-stopped
